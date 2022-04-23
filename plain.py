@@ -6,9 +6,6 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 
-#display the image
-#plt.imshow(Image.open('plain.png'))
-
 fig, ax = plt.subplots()
 plt.xlim(-20, 350)
 plt.ylim(-5, 120)
@@ -39,4 +36,4 @@ for index,row in df.iterrows():
     print(x,y,a,sc)
     draw(x*3,y,a,100,28,1-sc)
 
-plt.savefig("LH417.svg",dpi=300)
+plt.show()
