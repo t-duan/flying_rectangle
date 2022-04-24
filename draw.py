@@ -8,7 +8,9 @@ import pandas as pd
 
 fig, ax = plt.subplots()
 plt.xlim(-20, 350)
-plt.ylim(-5, 120)
+plt.ylim(-10, 250)
+ax.axes.get_xaxis().set_visible(False)
+ax.axes.get_yaxis().set_visible(False)
 
 def draw(x,y,angle,height,length,scale):
     r = patches.Rectangle((x/scale,y/scale),height,length, linewidth=5,ls="-.",edgecolor="blue",facecolor='yellow', alpha=0.30)
@@ -22,18 +24,18 @@ altitude_max = df["altitude"].max()
 altitude_min = df["altitude"].min()
 
 x_correct = df["long"].min()
-y_correct = 0
+y_correct = df["lati"].min()
 x = df["long"][0] - x_correct
-y = df["lati"][0] + y_correct
+y = df["lati"][0] - y_correct
 a = df["angle"][0]
 sc = (df["altitude"][0]- altitude_min) / (altitude_max - altitude_min) * 0.9
 
 for index,row in df.iterrows():
     x = row["long"] - x_correct
-    y = row["lati"] + y_correct
+    y = row["lati"] - y_correct
     a = row["angle"]
     sc = (row["altitude"] - altitude_min) / (altitude_max - altitude_min) * 0.9
     print(x,y,a,sc)
-    draw(x*3,y,a,100,28,1-sc)
+    draw(x*3,y*12+y_correct,a,100,28,1-sc)
 
 plt.show()
